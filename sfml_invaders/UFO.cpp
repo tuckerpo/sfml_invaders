@@ -16,13 +16,18 @@ UFO::UFO()
 
 void UFO::update(float dt)
 {
+	auto getX = [](sf::RectangleShape& sprite) {
+		return sprite.getPosition().x;
+	};
 	switch (m_ufo_state) {
 	case UFOState::None:
 		getInitialDir();
 		break;
 	case UFOState::Flying: 
 		m_sprite.move(m_speed* dt, 0.f);
-		printf("ufo is flyting\n");
+		if (getX(m_sprite) > 1500 || getX(m_sprite) < -1 - (m_sprite.getGlobalBounds().width)) {
+			m_ufo_state = UFOState::None;
+		}
 		break;
 	case UFOState::Destroyed:
 		m_ufo_state = UFOState::None;
@@ -30,7 +35,6 @@ void UFO::update(float dt)
 	case UFOState::Paused:
 		break;
 	default:
-		printf("Default UFO state\n");
 		break;
 	}
 }
@@ -55,20 +59,20 @@ void UFO::onCollide(Collidable& other)
 {
 	if (other.getType() == EntityType::Projectile) {
 		m_ufo_state = UFOState::Destroyed;
-		printf("UFO got got.\n");
-		
 	}
 }
 
 void UFO::getInitialDir() {
 	srand(time(NULL));
-	m_speed = rand() % 200;
+	m_speed = rand() % (200 + 1 - 100) + 100;
 	int randNum = rand() % 2;
 	if (randNum % 2 == 0) {
 		m_dir = UFODir::FromLeft;
+		m_sprite.setPosition(0 - m_sprite.getGlobalBounds().width, 45);
 	} else {
 		m_dir = UFODir::FromRight;
+		m_sprite.setPosition(1500, 45);
+		m_speed *= -1;
 	}
 	m_ufo_state = UFOState::Flying;
-
 }

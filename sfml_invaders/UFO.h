@@ -15,7 +15,7 @@ enum class UFOState
 enum class UFODir {
 	None = 0,
 	FromLeft,
-	FromRight
+	FromRight,
 };
 
 class UFO : public Collidable
@@ -37,6 +37,7 @@ public:
 
 protected:
 	void getInitialDir();
+
 private:
 	UFOState m_ufo_state;
 	EntityType m_Type;

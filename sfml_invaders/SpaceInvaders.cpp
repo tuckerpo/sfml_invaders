@@ -1,15 +1,26 @@
 #include "SpaceInvaders.h"
 
+// Original arcade game had a 5 x 11 grid of invaders, two rows of each unique sprite
+#define NUM_INVADERS 5 * 11
+
 SpaceInvaders::SpaceInvaders()
 	: Game(), m_window(sf::VideoMode(1500, 1000), "Space Invaders") {
+	// Window init
 	m_window.setPosition({ m_window.getPosition().x, 0 });
 	m_window.setFramerateLimit(60);
+	// Keyboard, player, UFO objects
 	kb = new Keyboard();
 	m_entities.push_back(new Player());
 	m_entities.push_back(new UFO());
+	// Invader init
+	for (uint8_t i = 0; i < NUM_INVADERS; i++) {
+		m_entities.push_back(new Invader(i));
+	}
+
 }
 
 SpaceInvaders::~SpaceInvaders() {
+	// Free all new'd objects
 	if (kb) delete kb;
 	for (Entity* entity : m_entities) {
 		if (entity) delete entity;
@@ -32,8 +43,10 @@ void SpaceInvaders::run() {
 		lastTime = time;
 		lag += elapsed;
 
+		// Handle input events
 		handleEvent();
 		
+		// Handle input & business logic for all entities, and update the display
 		for (const auto& entity : m_entities) {
 			entity->input(*kb);
 			entity->update(elapsed.asSeconds());

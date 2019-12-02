@@ -11,7 +11,11 @@ enum class InvaderState {
 
 class Invader : public Collidable
 {
-	Invader();
+public:
+	Invader() = default;
+
+	Invader(uint8_t idx);
+
 	virtual ~Invader() = default;
 
 	virtual void onCollide(Collidable& other) override;

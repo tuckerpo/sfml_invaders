@@ -7,6 +7,7 @@ enum class PlayerState {
 	None = 0,
 	Alive,
 	Dead,
+	Paused,
 	PlayerStateEnd,
 };
 class Player : public Collidable

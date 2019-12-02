@@ -1,9 +1,17 @@
 #include "Invader.h"
 
 
-Invader::Invader() {
+Invader::Invader(uint8_t idx) {
 	m_type = EntityType::Invader;
 	m_InvaderState = InvaderState::Alive;
+	m_sprite.setSize({ 48, 34 });
+	m_sprite.setPosition({ 
+		(0) + 55 * static_cast<float>(idx), 1000 - 800.f });
+	if (!m_texture.loadFromFile("res\\txrs\\si\\invaders.png")) {
+		printf("Invader::Invader() texture loading failed\n");
+	}
+	m_sprite.setTexture(&m_texture);
+	m_sprite.setTextureRect({ 0, 0, 12, 8 });
 }
 
 void Invader::onCollide(Collidable& other) {

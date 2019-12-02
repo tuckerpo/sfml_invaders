@@ -4,7 +4,9 @@
 #include "Player.h"
 #include "UFO.h"
 #include "Keyboard.h"
+#include "Invader.h"
 
+// Extends the Game interface for the game Space Invaders
 class SpaceInvaders : public Game {
 public:
 	SpaceInvaders();

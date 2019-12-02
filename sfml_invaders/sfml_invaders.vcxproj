@@ -138,6 +138,7 @@
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="SpaceInvaders.cpp" />
     <ClCompile Include="UFO.cpp" />
   </ItemGroup>
@@ -149,6 +150,7 @@
     <ClInclude Include="Invader.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Projectile.h" />
     <ClInclude Include="SpaceInvaders.h" />
     <ClInclude Include="UFO.h" />
   </ItemGroup>

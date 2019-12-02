@@ -45,6 +45,14 @@ void SpaceInvaders::run() {
 
 		// Handle input events
 		handleEvent();
+
+		// Handle player firing events
+		playerFire();
+
+		//TODO: Invader firing
+
+		// Handle projectile collisions;
+		doCollisions();
 		
 		// Handle input & business logic for all entities, and update the display
 		for (const auto& entity : m_entities) {
@@ -52,7 +60,34 @@ void SpaceInvaders::run() {
 			entity->update(elapsed.asSeconds());
 			entity->draw(m_window);
 		}
+
+		for (auto& projectile : m_projectiles) {
+			projectile.input(*kb);
+			projectile.update(elapsed.asSeconds());
+			projectile.draw(m_window);
+		}
 		m_window.display();
+	}
+}
+
+std::vector<Entity*> SpaceInvaders::getEntitiesByType(const EntityType& et)
+{
+	std::vector<Entity*> vec;
+	for (const auto& entity : m_entities) {
+		if (entity->getType() == et) {
+			vec.push_back(entity);
+		}
+	}
+	return vec;
+}
+
+void SpaceInvaders::playerFire() {
+	if (kb->is_key_down(sf::Keyboard::Key::Space)) {
+		auto players = getEntitiesByType(EntityType::Player);
+		for (auto& player : players) {
+			printf("Creating a new player projectile\n");
+			m_projectiles.emplace_back(dynamic_cast<Player*>(player)->getFirePosition(), ProjectileDirection::Up);
+		}
 	}
 }
 
@@ -67,6 +102,16 @@ void SpaceInvaders::handleEvent() {
 
 		default:
 			break;
+		}
+	}
+}
+
+void SpaceInvaders::doCollisions() {
+	for (auto& projectile : m_projectiles) {
+		for (auto& entity : m_entities) {
+			if (projectile.tryCollide(*entity)) {
+				printf("Collision detected\n");
+			}
 		}
 	}
 }

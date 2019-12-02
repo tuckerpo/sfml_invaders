@@ -30,7 +30,7 @@ void Player::update(float dt) {
 		break;
 	case PlayerState::Alive:
 		m_sprite.move(m_velocity * dt);
-		printf("Player x %f y %f velocity x %f velocity y %f\n", m_sprite.getPosition().x, m_sprite.getPosition().y, m_velocity.x, m_velocity.y);
+		//printf("Player x %f y %f velocity x %f velocity y %f\n", m_sprite.getPosition().x, m_sprite.getPosition().y, m_velocity.x, m_velocity.y);
 		if (m_sprite.getPosition().x <= 0) {
 			m_velocity.x = 1.f;
 			m_sprite.setPosition(1.f, 1000 - 40.f);
@@ -58,6 +58,11 @@ void Player::input(Keyboard& kb)
 	else if (kb.is_key_down(sf::Keyboard::Key::D)) {
 		m_velocity.x += speed;
 	}
+}
+
+sf::Vector2f Player::getFirePosition() const
+{
+	return sf::Vector2f(m_sprite.getPosition().x + m_sprite.getGlobalBounds().width / 2, m_sprite.getPosition().y);
 }
 
 

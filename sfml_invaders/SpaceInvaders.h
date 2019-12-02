@@ -5,6 +5,7 @@
 #include "UFO.h"
 #include "Keyboard.h"
 #include "Invader.h"
+#include "Projectile.h"
 
 // Extends the Game interface for the game Space Invaders
 class SpaceInvaders : public Game {
@@ -15,8 +16,12 @@ public:
 	void handleEvent() override;
 	virtual const std::string& getName() const override;
 private:
+	std::vector<Entity*> getEntitiesByType(const EntityType& et);
+	void doCollisions();
+	void playerFire();
 	Keyboard *kb;
-	std::vector<Entity*> m_entities;
+	std::vector<Collidable*> m_entities;
+	std::vector<Projectile> m_projectiles;
 	sf::RenderWindow m_window;
 	const std::string m_name = "Space Invaders";
 };

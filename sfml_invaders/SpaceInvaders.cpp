@@ -16,7 +16,7 @@ SpaceInvaders::SpaceInvaders()
 	for (uint8_t i = 0; i < NUM_INVADERS; i++) {
 		m_entities.push_back(new Invader(i));
 	}
-
+	m_projectiles.reserve(1024);
 }
 
 SpaceInvaders::~SpaceInvaders() {
@@ -110,7 +110,7 @@ void SpaceInvaders::doCollisions() {
 	for (auto& projectile : m_projectiles) {
 		for (auto& entity : m_entities) {
 			if (projectile.tryCollide(*entity)) {
-
+				m_projectiles.clear();
 			}
 		}
 	}

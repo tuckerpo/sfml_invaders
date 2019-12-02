@@ -24,12 +24,21 @@ const EntityType Player::getType() const
 }
 
 void Player::update(float dt) {
-	float w = m_sprite.getGlobalBounds().width;
+	float width = m_sprite.getGlobalBounds().width;
 	switch (m_PlayerState) {
 	case PlayerState::None:
 		break;
 	case PlayerState::Alive:
 		m_sprite.move(m_velocity * dt);
+		printf("Player x %f y %f velocity x %f velocity y %f\n", m_sprite.getPosition().x, m_sprite.getPosition().y, m_velocity.x, m_velocity.y);
+		if (m_sprite.getPosition().x <= 0) {
+			m_velocity.x = 1.f;
+			m_sprite.setPosition(1.f, 1000 - 40.f);
+		}
+		else if (m_sprite.getPosition().x + width >= 1500) {
+			m_velocity.x = -1.f;
+			m_sprite.setPosition(1500 - 1.f - width, 1000 - 40.f);
+		}
 		m_velocity *= 0.95f;
 		break;
 	case PlayerState::Dead:

@@ -34,5 +34,10 @@ private:
 	sf::RectangleShape m_sprite;
 	InvaderState m_InvaderState;
 	EntityType m_type;
+	const uint8_t m_rowShiftModulo = 11;
+	const uint8_t m_columnShiftModulo = 5;
+	const float m_initialYOff = 800.f;
+	static float m_YGap;
+	const float m_XGap = 75.f;
 };
 

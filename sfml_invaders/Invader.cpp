@@ -1,12 +1,18 @@
 #include "Invader.h"
 
+float Invader::m_YGap = 0.f;
 
 Invader::Invader(uint8_t idx) {
 	m_type = EntityType::Invader;
 	m_InvaderState = InvaderState::Alive;
 	m_sprite.setSize({ 48, 34 });
+	if (idx % m_rowShiftModulo == 0) {
+		m_YGap += 50.f;
+	}
 	m_sprite.setPosition({ 
-		(0) + 55 * static_cast<float>(idx), 1000 - 800.f });
+		((1500 / 2) / 2 ) + m_XGap * static_cast<float>(idx % m_rowShiftModulo), 1000 - m_initialYOff + m_YGap 
+	});
+
 	if (!m_texture.loadFromFile("res\\txrs\\si\\invaders.png")) {
 		printf("Invader::Invader() texture loading failed\n");
 	}

@@ -6,6 +6,7 @@ Projectile::Projectile() {
 }
 
 Projectile::Projectile(const sf::Vector2f& vec, const ProjectileDirection& dir)
+	: Collidable(12 / 1.5, 12)
 {
 	m_entityType = EntityType::Projectile;
 	m_ProjectileState = ProjectileState::Active;

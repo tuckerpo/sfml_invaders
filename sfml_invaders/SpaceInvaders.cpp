@@ -110,7 +110,7 @@ void SpaceInvaders::doCollisions() {
 	for (auto& projectile : m_projectiles) {
 		for (auto& entity : m_entities) {
 			if (projectile.tryCollide(*entity)) {
-				printf("Collision detected\n");
+
 			}
 		}
 	}

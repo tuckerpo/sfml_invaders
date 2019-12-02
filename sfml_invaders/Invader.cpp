@@ -2,7 +2,9 @@
 
 float Invader::m_YGap = 0.f;
 
-Invader::Invader(uint8_t idx) {
+Invader::Invader(uint8_t idx) 
+	: Collidable(48, 32)
+{
 	m_type = EntityType::Invader;
 	m_InvaderState = InvaderState::Alive;
 	m_sprite.setSize({ 48, 34 });
@@ -35,6 +37,7 @@ void Invader::update(float dt) {
 	case InvaderState::Paused:
 		break;
 	case InvaderState::Destroyed:
+		m_sprite.move({ -10000, -10000 });
 		break;
 	}
 }

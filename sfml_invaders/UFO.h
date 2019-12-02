@@ -35,6 +35,8 @@ public:
 
 	virtual void onCollide(Collidable& other) override;
 
+	virtual const sf::Vector2f& getPosition() const override;
+
 protected:
 	void getInitialDir();
 

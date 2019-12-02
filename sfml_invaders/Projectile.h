@@ -26,7 +26,7 @@ public:
 	virtual void draw(sf::RenderTarget&) override;
 	virtual void update(float dt) override;
 	virtual void input(Keyboard&) override;
-
+	virtual const sf::Vector2f& getPosition() const override;
 private:
 	sf::Texture m_texture;
 	sf::RectangleShape m_sprite;

@@ -62,6 +62,11 @@ void UFO::onCollide(Collidable& other)
 	}
 }
 
+const sf::Vector2f& UFO::getPosition() const
+{
+	return m_sprite.getPosition();
+}
+
 void UFO::getInitialDir() {
 	srand(time(NULL));
 	m_speed = rand() % (200 + 1 - 100) + 100;

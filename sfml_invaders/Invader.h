@@ -28,6 +28,8 @@ public:
 
 	virtual void input(Keyboard&) override;
 
+	virtual const sf::Vector2f& getPosition() const override;
+
 private:
 	sf::Texture m_texture;
 	sf::Vector2f m_velocity;

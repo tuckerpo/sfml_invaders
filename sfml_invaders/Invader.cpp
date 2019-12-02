@@ -48,6 +48,11 @@ void Invader::input(Keyboard& kb) {
 	}
 }
 
+const sf::Vector2f& Invader::getPosition() const
+{
+	return m_sprite.getPosition();
+}
+
 const EntityType Invader::getType() const {
 	return m_type;
 }

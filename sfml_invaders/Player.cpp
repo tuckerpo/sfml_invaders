@@ -60,6 +60,11 @@ void Player::input(Keyboard& kb)
 	}
 }
 
+const sf::Vector2f& Player::getPosition() const
+{
+	return m_sprite.getPosition();
+}
+
 sf::Vector2f Player::getFirePosition() const
 {
 	return sf::Vector2f(m_sprite.getPosition().x + m_sprite.getGlobalBounds().width / 2, m_sprite.getPosition().y);

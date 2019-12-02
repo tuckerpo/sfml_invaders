@@ -17,7 +17,7 @@ bool Collidable::tryCollide(Collidable& other)
 	return false;
 }
 
-sf::FloatRect Collidable::getHitBox()
+sf::FloatRect Collidable::getHitBox() const
 {
 	return sf::FloatRect(
 		this->getPosition().x,

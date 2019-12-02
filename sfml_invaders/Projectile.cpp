@@ -57,3 +57,8 @@ void Projectile::input(Keyboard&)
 {
 	return;
 }
+
+const sf::Vector2f& Projectile::getPosition() const
+{
+	return m_sprite.getPosition();
+}

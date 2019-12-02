@@ -7,7 +7,7 @@ enum class EntityType
 {
 	None = 0,
 	Player,
-	Alien,
+	Invader,
 	UFO,
 	Projectile,
 	NumEntityTypes,

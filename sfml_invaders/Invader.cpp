@@ -48,6 +48,11 @@ void Invader::input(Keyboard& kb) {
 	}
 }
 
+sf::Vector2f Invader::getFirePosition() const {
+	printf("m_sprite.getPosition().x = %f, m_sprite.getGlobalBounds().width = %f\n", m_sprite.getPosition().x, m_sprite.getGlobalBounds().width / 2);
+	return sf::Vector2f(m_sprite.getPosition().x + m_sprite.getGlobalBounds().width / 2, m_sprite.getPosition().y);
+}
+
 const sf::Vector2f& Invader::getPosition() const
 {
 	return m_sprite.getPosition();
@@ -55,4 +60,8 @@ const sf::Vector2f& Invader::getPosition() const
 
 const EntityType Invader::getType() const {
 	return m_type;
+}
+
+const bool Invader::isAlive() const {
+	return m_InvaderState != InvaderState::Destroyed;
 }

@@ -49,7 +49,7 @@ void SpaceInvaders::run() {
 		// Handle player firing events
 		playerFire();
 
-		//TODO: Invader firing
+		invadersFire();
 
 		// Handle projectile collisions;
 		doCollisions();
@@ -81,11 +81,21 @@ std::vector<Entity*> SpaceInvaders::getEntitiesByType(const EntityType& et)
 	return vec;
 }
 
+void SpaceInvaders::invadersFire() {
+	auto invaders = getEntitiesByType(EntityType::Invader);
+	for (auto& invader : invaders) {
+		if (!dynamic_cast<Invader*>(invader)->isAlive()) {
+			continue;
+		}
+		m_projectiles.emplace_back(dynamic_cast<Invader*>(invader)->getFirePosition(), ProjectileDirection::Down);
+		break;
+	}
+}
+
 void SpaceInvaders::playerFire() {
 	if (kb->is_key_down(sf::Keyboard::Key::Space)) {
 		auto players = getEntitiesByType(EntityType::Player);
 		for (auto& player : players) {
-			printf("Creating a new player projectile\n");
 			m_projectiles.emplace_back(dynamic_cast<Player*>(player)->getFirePosition(), ProjectileDirection::Up);
 		}
 	}

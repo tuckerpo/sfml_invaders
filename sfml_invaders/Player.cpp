@@ -90,3 +90,7 @@ const uint16_t Player::getNumLives() const {
 const uint16_t Player::getScore() const {
 	return m_score;
 }
+
+const bool Player::isAlive() const {
+	return m_numLives > 0;
+}

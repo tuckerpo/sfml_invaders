@@ -37,6 +37,8 @@ public:
 
 	virtual const sf::Vector2f& getPosition() const override;
 
+	virtual const bool isAlive() const override;
+
 protected:
 	void getInitialDir();
 

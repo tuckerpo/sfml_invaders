@@ -8,6 +8,7 @@ Projectile::Projectile() {
 Projectile::Projectile(const sf::Vector2f& vec, const ProjectileDirection& dir)
 	: Collidable(12 / 1.5, 12)
 {
+	printf("collidable(x = %f, y = %f)\n", vec.x, vec.y);
 	m_entityType = EntityType::Projectile;
 	m_ProjectileState = ProjectileState::Active;
 	m_projDir = dir;
@@ -42,7 +43,6 @@ void Projectile::update(float dt)
 	case ProjectileState::Active:
 		m_velocity.y += 600 * static_cast<float>(m_projDir) * dt;
 		m_sprite.move(m_velocity * dt);
-		printf("Projectile %f %f\n", m_velocity.x, m_velocity.y);
 		break;
 	case ProjectileState::Destroyed:
 		m_velocity.y *= 18388345857834; //TODO: fix this
@@ -61,4 +61,8 @@ void Projectile::input(Keyboard&)
 const sf::Vector2f& Projectile::getPosition() const
 {
 	return m_sprite.getPosition();
+}
+
+const bool Projectile::isAlive() const {
+	return m_ProjectileState != ProjectileState::Destroyed;
 }

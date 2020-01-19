@@ -8,6 +8,9 @@ Collidable::Collidable(float width, float height)
 
 bool Collidable::tryCollide(Collidable& other)
 {
+	if (other.getType() == this->getType()) {
+		return false;
+	}
 	if (this->getHitBox().intersects(other.getHitBox())) {
 		this->onCollide(other);
 		other.onCollide(*this);

@@ -17,6 +17,7 @@ public:
 	virtual const std::string& getName() const override;
 private:
 	std::vector<Entity*> getEntitiesByType(const EntityType& et);
+	void invadersFire();
 	void doCollisions();
 	void playerFire();
 	Keyboard *kb;

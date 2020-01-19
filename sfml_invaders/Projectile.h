@@ -27,6 +27,7 @@ public:
 	virtual void update(float dt) override;
 	virtual void input(Keyboard&) override;
 	virtual const sf::Vector2f& getPosition() const override;
+	virtual const bool isAlive() const override;
 private:
 	sf::Texture m_texture;
 	sf::RectangleShape m_sprite;

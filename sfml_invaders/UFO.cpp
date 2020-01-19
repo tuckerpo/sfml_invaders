@@ -81,3 +81,7 @@ void UFO::getInitialDir() {
 	}
 	m_ufo_state = UFOState::Flying;
 }
+
+const bool UFO::isAlive() const {
+	return m_ufo_state != UFOState::Destroyed;
+}

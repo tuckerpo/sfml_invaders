@@ -28,7 +28,11 @@ public:
 
 	virtual void input(Keyboard&) override;
 
+	sf::Vector2f getFirePosition() const;
+
 	virtual const sf::Vector2f& getPosition() const override;
+
+	const bool isAlive() const override;
 
 private:
 	sf::Texture m_texture;

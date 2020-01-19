@@ -20,6 +20,7 @@ public:
 	void draw(sf::RenderTarget& target) override;
 	void update(float ft) override;
 	void input(Keyboard& kb);
+	virtual const bool isAlive() const override;
 	virtual const sf::Vector2f& getPosition() const override;
 	sf::Vector2f getFirePosition() const;
 protected:

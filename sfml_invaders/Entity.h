@@ -24,6 +24,7 @@ public:
 	virtual void draw(sf::RenderTarget&) = 0;
 	virtual void update(float dt) = 0;
 	virtual void input(Keyboard&) = 0;
+	virtual const bool isAlive() const = 0;
 private:
 	sf::Sprite m_Sprite;
 	sf::Vector2f m_Pos;

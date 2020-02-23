@@ -12,6 +12,7 @@ enum class ProjectileState {
 	None = 0,
 	Active,
 	Destroyed,
+	Paused,
 	NumProjectileStates,
 };
 

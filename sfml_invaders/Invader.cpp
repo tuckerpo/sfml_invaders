@@ -7,6 +7,8 @@ Invader::Invader(uint8_t idx)
 {
 	m_type = EntityType::Invader;
 	m_InvaderState = InvaderState::Alive;
+	m_FiringState = FiringState::None;
+	m_BeginFireTime = std::chrono::steady_clock::now();
 	m_sprite.setSize({ 48, 34 });
 	if (idx % m_rowShiftModulo == 0) {
 		m_YGap += 50.f;
@@ -23,14 +25,25 @@ Invader::Invader(uint8_t idx)
 }
 
 void Invader::onCollide(Collidable& other) {
-	m_InvaderState = InvaderState::Destroyed;
+	if (other.getType() != this->getType()) {
+		m_InvaderState = InvaderState::Destroyed;
+	}
 }
 
 void Invader::draw(sf::RenderTarget& target) {
 	target.draw(m_sprite);
+	for (auto& projectile : m_Projectiles)
+	{
+		projectile.draw(target);
+	}
 }
 
 void Invader::update(float dt) {
+	for (auto& projectile : m_Projectiles)
+	{
+		projectile.update(dt);
+	}
+
 	switch (m_InvaderState) {
 	case InvaderState::None:
 		break;
@@ -42,14 +55,18 @@ void Invader::update(float dt) {
 	}
 }
 
-void Invader::input(Keyboard& kb) {
+void Invader::input(Keyboard& kb)
+{
+	for (auto& projectile : m_Projectiles)
+	{
+		projectile.input(kb);
+	}
 	if (kb.is_key_down(sf::Keyboard::Key::Pause)) {
 		m_InvaderState = InvaderState::Paused;
 	}
 }
 
 sf::Vector2f Invader::getFirePosition() const {
-	printf("m_sprite.getPosition().x = %f, m_sprite.getGlobalBounds().width = %f\n", m_sprite.getPosition().x, m_sprite.getGlobalBounds().width / 2);
 	return sf::Vector2f(m_sprite.getPosition().x + m_sprite.getGlobalBounds().width / 2, m_sprite.getPosition().y);
 }
 
@@ -64,4 +81,18 @@ const EntityType Invader::getType() const {
 
 const bool Invader::isAlive() const {
 	return m_InvaderState != InvaderState::Destroyed;
+}
+
+void Invader::DoFire() {
+	std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
+	if (now > m_BeginFireTime + std::chrono::milliseconds(1000))
+	{
+		m_Projectiles.emplace_back(getFirePosition(), ProjectileDirection::Down);
+		m_BeginFireTime = now;
+		m_FiringState = FiringState::Firing;
+	}
+}
+
+bool Invader::IsFiring() const {
+	return m_FiringState == FiringState::Firing;
 }

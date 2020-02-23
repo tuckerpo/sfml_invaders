@@ -1,5 +1,7 @@
 #pragma once
 #include "Collidable.h"
+#include "Projectile.h"
+#include <chrono>
 
 enum class InvaderState {
 	None = 0,
@@ -7,6 +9,11 @@ enum class InvaderState {
 	Alive,
 	Destroyed,
 	NumInvaderStates,
+};
+
+enum class FiringState {
+	None = 0,
+	Firing = 1,
 };
 
 class Invader : public Collidable
@@ -34,12 +41,19 @@ public:
 
 	const bool isAlive() const override;
 
+	virtual void DoFire();
+
+	virtual bool IsFiring() const;
+
 private:
 	sf::Texture m_texture;
 	sf::Vector2f m_velocity;
 	sf::RectangleShape m_sprite;
 	InvaderState m_InvaderState;
+	FiringState m_FiringState;
 	EntityType m_type;
+	std::vector<Projectile> m_Projectiles;
+	std::chrono::time_point<std::chrono::high_resolution_clock> m_BeginFireTime;
 	const uint8_t m_rowShiftModulo = 11;
 	const uint8_t m_columnShiftModulo = 5;
 	const float m_initialYOff = 800.f;

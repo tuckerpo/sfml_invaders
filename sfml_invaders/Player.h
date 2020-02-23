@@ -2,6 +2,9 @@
 #include "Entity.h"
 #include "Collidable.h"
 #include "Keyboard.h"
+#include "Projectile.h"
+#include <vector>
+#include <chrono>
 
 enum class PlayerState {
 	None = 0,
@@ -10,6 +13,7 @@ enum class PlayerState {
 	Paused,
 	PlayerStateEnd,
 };
+
 class Player : public Collidable
 {
 public:
@@ -23,12 +27,15 @@ public:
 	virtual const bool isAlive() const override;
 	virtual const sf::Vector2f& getPosition() const override;
 	sf::Vector2f getFirePosition() const;
+	virtual void DoFire();
 protected:
 	const uint16_t getNumLives() const;
 	const uint16_t getScore() const;
 private:
 	EntityType m_Type;
 	PlayerState m_PlayerState;
+	std::chrono::time_point<std::chrono::high_resolution_clock> m_BeginFireTime;
+	std::vector<Projectile> m_Projectiles;
 	uint16_t m_numLives;
 	uint16_t m_score;
 	sf::Texture m_texture;

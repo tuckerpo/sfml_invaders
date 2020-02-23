@@ -8,7 +8,6 @@ Projectile::Projectile() {
 Projectile::Projectile(const sf::Vector2f& vec, const ProjectileDirection& dir)
 	: Collidable(12 / 1.5, 12)
 {
-	printf("collidable(x = %f, y = %f)\n", vec.x, vec.y);
 	m_entityType = EntityType::Projectile;
 	m_ProjectileState = ProjectileState::Active;
 	m_projDir = dir;
@@ -40,6 +39,8 @@ void Projectile::draw(sf::RenderTarget& target)
 void Projectile::update(float dt)
 {
 	switch (m_ProjectileState) {
+	case ProjectileState::Paused:
+		break;
 	case ProjectileState::Active:
 		m_velocity.y += 600 * static_cast<float>(m_projDir) * dt;
 		m_sprite.move(m_velocity * dt);
@@ -53,8 +54,10 @@ void Projectile::update(float dt)
 	}
 }
 
-void Projectile::input(Keyboard&)
+void Projectile::input(Keyboard& kb)
 {
+	if (kb.is_key_down(sf::Keyboard::Key::Pause))
+		m_ProjectileState = ProjectileState::Paused;
 	return;
 }
 

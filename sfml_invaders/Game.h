@@ -1,5 +1,12 @@
 #pragma once
 
+enum class GameState {
+	None = 0,
+	Paused = 1,
+	Playing = 2,
+	Over = 3,
+};
+
 class Game {
 public:
 	Game() = default;

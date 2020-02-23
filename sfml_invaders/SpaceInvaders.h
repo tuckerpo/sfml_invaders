@@ -20,7 +20,11 @@ private:
 	void invadersFire();
 	void doCollisions();
 	void playerFire();
-	Keyboard *kb;
+	bool IsGamePaused();
+	GameState m_GameState;
+	std::chrono::steady_clock::time_point m_InvaderFired;
+	std::chrono::steady_clock::time_point m_LastPausedTime;
+	std::unique_ptr<Keyboard> kb;
 	std::vector<Collidable*> m_entities;
 	std::vector<Projectile> m_projectiles;
 	sf::RenderWindow m_window;

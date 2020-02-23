@@ -39,8 +39,10 @@ void UFO::update(float dt)
 	}
 }
 
-void UFO::input(Keyboard&)
+void UFO::input(Keyboard& kb)
 {
+	if (kb.is_key_down(sf::Keyboard::Key::Pause))
+		m_ufo_state = UFOState::Paused;
 	return;
 }
 

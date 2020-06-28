@@ -16,8 +16,7 @@ enum class ProjectileState {
 	NumProjectileStates,
 };
 
-class Projectile : public Collidable
-{
+class Projectile : public Collidable {
 public:
 	Projectile();
 	Projectile(const sf::Vector2f&, const ProjectileDirection&);
@@ -25,7 +24,7 @@ public:
 	virtual void onCollide(Collidable& other) override;
 	virtual const EntityType getType() const override;
 	virtual void draw(sf::RenderTarget&) override;
-	virtual void update(float dt) override;
+    virtual void update(float dt) override;
 	virtual void input(Keyboard&) override;
 	virtual const sf::Vector2f& getPosition() const override;
 	virtual const bool isAlive() const override;

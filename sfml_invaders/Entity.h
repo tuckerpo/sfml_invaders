@@ -1,34 +1,32 @@
 #pragma once
-#include <SFML/Graphics.hpp>
-#include <vector>
 #include "Keyboard.h"
 
-enum class EntityType
-{
-	None = 0,
-	Player,
-	Invader,
-	UFO,
-	Projectile,
-	NumEntityTypes,
+#include <SFML/Graphics.hpp>
+#include <vector>
+
+enum class EntityType {
+    None = 0,
+    Player,
+    Invader,
+    UFO,
+    Projectile,
+    NumEntityTypes,
 };
 
 // Entity class
-class Entity
-{
+class Entity {
 public:
-	Entity() = default;
-	virtual ~Entity() = default;
-	virtual const sf::Vector2f& getPosition() const;
-	virtual const EntityType getType() const = 0;
-	virtual void draw(sf::RenderTarget&) = 0;
-	virtual void update(float dt) = 0;
-	virtual void input(Keyboard&) = 0;
-	virtual const bool isAlive() const = 0;
-private:
-	sf::Sprite m_Sprite;
-	sf::Vector2f m_Pos;
-	sf::Vector2u m_Size;
-	EntityType m_entityType;
-};
+    Entity() = default;
+    virtual ~Entity() = default;
+    virtual const EntityType getType() const = 0;
+    virtual void draw(sf::RenderTarget&) = 0;
+    virtual void update(float dt) = 0;
+    virtual void input(Keyboard&) = 0;
+    virtual const bool isAlive() const = 0;
 
+private:
+    sf::Sprite m_Sprite;
+    sf::Vector2f m_Pos;
+    sf::Vector2u m_Size;
+    EntityType m_entityType;
+};

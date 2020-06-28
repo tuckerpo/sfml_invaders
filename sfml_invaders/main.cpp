@@ -1,9 +1,9 @@
-#include <SFML/Graphics.hpp>
 #include "Keyboard.h"
 #include "SpaceInvaders.h"
 
+#include <SFML/Graphics.hpp>
+
 int main() {
-	SpaceInvaders *si = new SpaceInvaders();
-	si->run();
-	delete si;
+    SpaceInvaders si;
+    si.run();
 }

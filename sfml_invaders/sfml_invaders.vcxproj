@@ -133,7 +133,6 @@
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Collidable.cpp" />
-    <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Invader.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="main.cpp" />
@@ -147,6 +146,8 @@
     <ClInclude Include="Collidable.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="ICommand.h" />
+    <ClInclude Include="InputDevice.h" />
     <ClInclude Include="Invader.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="Player.h" />
@@ -162,6 +163,9 @@
     <Image Include="res\txrs\si\player.png" />
     <Image Include="res\txrs\si\projectile.png" />
     <Image Include="res\txrs\si\ufo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".clang-format" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
